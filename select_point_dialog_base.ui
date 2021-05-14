@@ -17,7 +17,7 @@
    <item row="0" column="0">
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>1</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
@@ -84,7 +84,7 @@
      </widget>
      <widget class="QWidget" name="tab_3">
       <attribute name="title">
-       <string>頁面</string>
+       <string>tab_3</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_5">
        <item row="0" column="0">
@@ -97,7 +97,7 @@
           </widget>
          </item>
          <item row="0" column="1">
-          <widget class="QPushButton" name="pushButton_5">
+          <widget class="QPushButton" name="pushButton_4">
            <property name="text">
             <string>Update</string>
            </property>
@@ -106,25 +106,23 @@
          <item row="1" column="0" colspan="2">
           <widget class="QTableWidget" name="tableWidget"/>
          </item>
-         <item row="2" column="0" colspan="2">
-          <widget class="QPushButton" name="pushButton_4">
+         <item row="2" column="0">
+          <widget class="QPushButton" name="pushButton_5">
            <property name="text">
-            <string>Export</string>
+            <string>Export column(s)</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QPushButton" name="pushButton_6">
+           <property name="text">
+            <string>Export full table</string>
            </property>
           </widget>
          </item>
         </layout>
        </item>
       </layout>
-      <zorder>pushButton_5</zorder>
-      <zorder>tableWidget</zorder>
-      <zorder>label_3</zorder>
-      <zorder>pushButton_4</zorder>
-     </widget>
-     <widget class="QWidget" name="tab_4">
-      <attribute name="title">
-       <string>頁面</string>
-      </attribute>
      </widget>
     </widget>
    </item>
@@ -137,8 +135,8 @@
   <tabstop>pushButton_2</tabstop>
   <tabstop>listWidget</tabstop>
   <tabstop>pushButton_3</tabstop>
-  <tabstop>pushButton_4</tabstop>
   <tabstop>pushButton_5</tabstop>
+  <tabstop>pushButton_4</tabstop>
   <tabstop>tableWidget</tabstop>
  </tabstops>
  <resources/>

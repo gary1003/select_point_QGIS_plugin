@@ -23,7 +23,7 @@
 """
 from qgis.PyQt.QtCore import QSettings, QTranslator, QCoreApplication
 from qgis.PyQt.QtGui import QIcon
-from qgis.PyQt.QtWidgets import QAction, QFileDialog, QTableWidgetItem
+from qgis.PyQt.QtWidgets import QAction, QFileDialog, QTableWidgetItem, QTableWidget
 from qgis.core import QgsProject
 #from qgis.utils import iface
 from qgis.core import QgsDataSourceUri, QgsApplication
@@ -197,7 +197,9 @@ class SelectPoint:
             self.dlg.pushButton.clicked.connect(self.browse)
             self.dlg.pushButton_2.clicked.connect(self.load_file)
             self.dlg.pushButton_3.clicked.connect(self.add_layer)
-            self.dlg.pushButton_5.clicked.connect(self.update)
+            self.dlg.pushButton_4.clicked.connect(self.update)
+            self.dlg.pushButton_5.clicked.connect(self.export_columns)
+            self.dlg.pushButton_6.clicked.connect(self.export_full)
 
         # show the dialog
         self.dlg.show()
@@ -266,4 +268,35 @@ class SelectPoint:
             for c in range(len(d)):
                 temp = QTableWidgetItem(d[c])
                 self.dlg.tableWidget.setItem(r,c,temp)
+       
+        self.header = []
+        for field in self.layer.fields():
+            self.header.append(field.name())
+        self.dlg.tableWidget.setHorizontalHeaderLabels(self.header)
+        self.dlg.tableWidget.horizontalHeader().setVisible(True)
+        self.dlg.tableWidget.resizeColumnsToContents()
+        self.dlg.tableWidget.setSelectionBehavior(QTableWidget.SelectColumns)
+
+    def export_columns(self):
+        import pandas as pd
+
+        self.selected_columns = []
+        item = self.dlg.tableWidget.selectedItems()
+        for i in item:
+            if self.dlg.tableWidget.indexFromItem(i).column() not in self.selected_columns:
+                self.selected_columns.append(self.dlg.tableWidget.indexFromItem(i).column())
+        self.columns = []
+        for i in self.selected_columns:
+            self.columns.append(self.header[i])
+        nrow = self.dlg.tableWidget.rowCount()
+        #ncol = len(self.columns)
+        self.df = pd.DataFrame(columns=self.columns, index = range(nrow))
+        for r, c in zip(range(nrow), self.selected_columns):
+            self.df.at[r,c] = self.dlg.tableWidget.item(r, c).text()
+        print(self.df.head())    
+
+
+    def export_full(self):
+        return
+
 
